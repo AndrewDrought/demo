@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+     https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1-create-currency-table" author="dev">
+        <createTable tableName="currency">
+            <column name="id" type="BIGSERIAL" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="currency_code" type="VARCHAR(10)" />
+        </createTable>
+        <createIndex tableName="currency" indexName="idx_currency_code">
+            <column name="currency_code"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="2-create-exchange-rate-table" author="dev">
+        <createTable tableName="exchange_rate">
+            <column name="id" type="BIGSERIAL" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="base_currency" type="VARCHAR(10)"/>
+            <column name="target_currency" type="VARCHAR(10)"/>
+            <column name="rate" type="NUMERIC(12,5)"/>
+            <column name="fetched_at" type="TIMESTAMP WITH TIME ZONE" defaultValueDate="CURRENT_TIMESTAMP"/>
+        </createTable>
+        <createIndex tableName="exchange_rate" indexName="idx_base_target">
+            <column name="base_currency"/>
+            <column name="target_currency"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

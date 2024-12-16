@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/currency_db
+    username: postgres
+    password: Jj7i55nLD4
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  liquibase:
+    change-log: classpath:db/changelog.xml
+
+logging:
+  level:
+    root: INFO
+
+scheduler:
+#  cron: "0 0 * * * ?"
+  cron: "0 * * * * ?"
+
+external:
+  api:
+    access-key: 958d4247bcae40325da4d17fb1603482
